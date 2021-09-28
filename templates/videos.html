@@ -1,0 +1,47 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+{% for video in videos %}
+	<div class="col-lg-2 ">
+	<video width="200" height="200" controls >
+	<source src="{{video.video.url}}" type="video/mp4">
+	<b>{{video.title}}</b>
+	</video>
+		<div style="margin: 10px;">
+			<input type="button" name="embed" value="Embed Url" onclick="generateIframe('{{video.id}}')">
+		</div>
+		<div style="margin: 10px;">
+			<input type="button" name="embed" value="Embed Here" onclick="generateIframeLocal('{{video.id}}')">
+		</div>
+	</div>
+	<span id='iframe-tag-{{ video.id }}'></span>
+{% endfor %}
+
+<br><a href="{% url 'upload' %}">Upload New</a>
+<script type="text/javascript">
+
+	function generateIframeLocal(id) {
+    	var id = id
+    	$.post("{% url 'embed' %}",
+		  {
+		    video_id: id,
+		  },
+		  function(data, status){
+		   var iframe = document.createElement('iframe');
+		   iframe.src = data.ihtml
+		   document.body.appendChild(iframe);
+		  });
+    }
+    function generateIframe(id) {
+    	var id = id
+    	$('#iframe-tag-'+id).empty();
+    	$.post("{% url 'embed' %}",
+		  {
+		    video_id: id,
+		  },
+		  function(data, status){
+		    $('#iframe-tag-'+id).append(data.ihtml)
+		  });
+    }
+</script> 
