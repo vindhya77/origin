@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'embed',
     'rest_framework',
-    'redis_cache'
+    'redis_cache',
+    'restapis'
 ]
 
 MIDDLEWARE = [

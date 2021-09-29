@@ -21,4 +21,14 @@ def home(request):
 
 	return JsonResponse({'status': 200, 'db': db, 'data': payload})
 
+
+def get_set_cookie(request):  
+	if request.COOKIES.get('loggedIn'):
+		html = HttpResponse("<center>Already logged user<br>{0}</center>".format(request.COOKIES['loggedIn']))
+	else:
+		html = HttpResponse("<h1>Welcome to Django Website</h1>")
+		html.set_cookie('loggedIn', 'Yes', max_age = None)
+
+	return html 
+
 	

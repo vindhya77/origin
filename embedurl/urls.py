@@ -28,6 +28,7 @@ urlpatterns = [
     path('embed/',views.embed,name='embed'),
     path('api/', include('embed.urls')),
     path('redis/', include('redis_cache.urls')),
+    path('rest/', include('restapis.urls')),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]

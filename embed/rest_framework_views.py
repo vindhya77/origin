@@ -31,3 +31,6 @@ class PharmaDetailView(APIView):
 			result_list.append(component_dict)
 
 		return Response(result_list)
+
+	def post(self, request):
+		pass
